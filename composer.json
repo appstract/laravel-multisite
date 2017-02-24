@@ -1,0 +1,40 @@
+{
+    "name": "appstract/laravel-multisite",
+    "description": "Multisite setup for Laravel",
+    "keywords": [
+        "appstract",
+        "laravel-multisite"
+    ],
+    "homepage": "https://github.com/appstract/laravel-multisite",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gijs Jorissen",
+            "email": "hello@appstract.team",
+            "homepage": "https://appstract.team",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Appstract\\Multisite\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Appstract\\Multisite\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+  }
+}
