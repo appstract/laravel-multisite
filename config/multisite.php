@@ -2,6 +2,12 @@
 
 return [
 
-    'overwiting' => true,
+    'overwrite' => [
+
+        'enabled' => true,
+
+        'views' => 'partials.*'
+
+    ]
 
 ];

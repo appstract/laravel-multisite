@@ -19,7 +19,7 @@ class CurrentSiteComposer
      */
     public function __construct()
     {
-        $this->site = Site::where('nickname', Config::get('app.site'))->first();
+        $this->site = Site::where('nickname', Config::get('multisite.site'))->first();
     }
 
     /**

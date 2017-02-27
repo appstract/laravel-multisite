@@ -17,7 +17,7 @@ class CurrentSite
      */
     public function handle($request, Closure $next, $site)
     {
-        Config::set('app.site', $site);
+        Config::set('multisite.site', $site);
 
         return $next($request);
     }

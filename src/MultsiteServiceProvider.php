@@ -2,6 +2,7 @@
 
 namespace Appstract\Multisite;
 
+use Config;
 use Appstract\Multisite\Middleware\CurrentSite;
 Use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\View;
@@ -15,19 +16,21 @@ class MultisiteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         if ($this->app->runningInConsole()) {
-
             $this->registerMigrations();
 
             $this->publishes([
                 __DIR__.'/../config/multisite.php' => config_path('multisite.php'),
             ], 'config');
-
         }
 
+        $overwriteViews = Config::get('multisite.overwrite.views');
+
+        // Middleware
         $router->aliasMiddleware('site', CurrentSite::class);
 
-        View::composer('*',          'Appstract\Multisite\Composers\CurrentSiteComposer');
-        View::composer('partials.*', 'Appstract\Multisite\Composers\ViewPathComposer');
+        // Composers
+        View::composer('*', 'Appstract\Multisite\Composers\CurrentSiteComposer');
+        View::composer($overwriteViews, 'Appstract\Multisite\Composers\OverwriteViewComposer');
     }
 
     /**
@@ -49,6 +52,6 @@ class MultisiteServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'skeleton');
+        $this->mergeConfigFrom(__DIR__.'/../config/multisite.php', 'multisite');
     }
 }
