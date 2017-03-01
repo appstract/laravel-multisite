@@ -15,14 +15,6 @@ class CurrentSiteComposer
     protected $site;
 
     /**
-     * Construct.
-     */
-    public function __construct()
-    {
-        $this->site = Site::where('nickname', Config::get('multisite.site'))->first();
-    }
-
-    /**
      * Bind data to the view.
      *
      * @param  View  $view
@@ -30,6 +22,10 @@ class CurrentSiteComposer
      */
     public function compose(View $view)
     {
+        if (! $this->site) {
+            $this->site = Site::where('slug', Config::get('multisite.site'))->first();
+        }
+
         $view->with('currentSite', $this->site);
     }
 }

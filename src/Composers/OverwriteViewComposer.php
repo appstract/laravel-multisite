@@ -27,13 +27,13 @@ class OverwriteViewComposer
             return $view;
         }
 
-        $currentSite = Site::where('nickname', Config::get('multisite.site'))->first();
+        $currentSite = Site::where('slug', Config::get('multisite.site'))->first();
 
-        $parts = collect(explode('/views/', $view->getPath()));
+        $viewsPath = realpath(base_path('resources/views'));
 
-        $viewsPath    = $parts->first().'views';
-        $possiblePath = $parts->first().'/views/'.$currentSite->nickname.'/'.$parts->last();
-        $possibleView = str_replace(['.blade.php'], [''], $currentSite->nickname.'.'.$parts->last());
+        $currentPath  = collect(explode('/views/', $view->getPath()))->last();
+        $possiblePath = $viewsPath.'/'.$currentSite->slug.'/'.$currentPath;
+        $possibleView = str_replace(['.blade.php'], [''], $currentSite->slug.'.'.$currentPath);
 
         if(\View::exists($possibleView)) {
             $view->setPath($possiblePath);
@@ -49,6 +49,6 @@ class OverwriteViewComposer
      */
     protected function overwriteDisabled($view)
     {
-        return ! Config::get('multisite.overwrite.enabled') || $view->overwrite === false;
+        return ! Config::get('multisite.views.overwrite') || $view->overwrite === false;
     }
 }

@@ -2,12 +2,16 @@
 
 return [
 
-    'overwrite' => [
+    'host' => env('MULTISITE_HOST', 'localhost.dev'),
 
-        'enabled' => true,
+    'views' => [
 
-        'views' => 'partials.*'
+        'overwrite' => true,
 
-    ]
+        'overwrite_path' => 'partials.*',
+
+        'sites_path' => 'sites'
+
+    ],
 
 ];
