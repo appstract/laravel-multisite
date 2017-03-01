@@ -3,8 +3,8 @@
 namespace Appstract\Multisite\Composers;
 
 use Config;
-use Appstract\Multisite\Site;
 use Illuminate\View\View;
+use Appstract\Multisite\Site;
 
 class OverwriteViewComposer
 {
@@ -32,7 +32,6 @@ class OverwriteViewComposer
         $this->sitesFolder = Config::get('multisite.views.sites');
     }
 
-
     /**
      * Bind data to the view.
      *
@@ -47,7 +46,7 @@ class OverwriteViewComposer
 
         $this->currentPath = collect(explode('/views/', $view->getPath()))->last();
 
-        if(\View::exists($this->getNewView())) {
+        if (\View::exists($this->getNewView())) {
             $view->setPath($this->getNewPath());
         }
 
@@ -92,7 +91,7 @@ class OverwriteViewComposer
      * Check if overwrites are disabled.
      *
      * @param  View $view
-     * @return boolean
+     * @return bool
      */
     protected function overwriteDisabled($view)
     {
