@@ -4,7 +4,6 @@ namespace Appstract\Multisite\Middleware;
 
 use Config;
 use Closure;
-use Illuminate\Support\Facades\View;
 
 class CurrentSite
 {
