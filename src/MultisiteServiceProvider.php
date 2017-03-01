@@ -18,6 +18,8 @@ class MultisiteServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerMigrations();
 
+            $this->publishSeeds();
+
             $this->publishes([
                 __DIR__.'/../config/multisite.php' => config_path('multisite.php'),
             ], 'config');
@@ -43,7 +45,7 @@ class MultisiteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Passport's migration files.
+     * Register and publish migration files.
      *
      * @return void
      */
@@ -53,7 +55,19 @@ class MultisiteServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'multisite-migrations');
+        ], 'multisite-database');
+    }
+
+    /**
+     * Publish seed files.
+     *
+     * @return void
+     */
+    protected function publishSeeds()
+    {
+        $this->publishes([
+            __DIR__.'/../database/seeds' => database_path('seeds'),
+        ], 'multisite-database');
     }
 
     /**
