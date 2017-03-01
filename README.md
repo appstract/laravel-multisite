@@ -23,7 +23,7 @@ First of all, you need to add the sites to your `/etc/hosts` file and `Homestead
 
 ### Publish
 
-Within you Laravel project, run `php artisan vendor:publish --provider="Appstract\Multisite\MultisiteServiceProvider"` to publish all files used by laravel-multisite. The files that will be published are: a migration, a seeder and a config file.
+By running `php artisan vendor:publish --provider="Appstract\Multisite\MultisiteServiceProvider"` in your project all files for multisite will be published. The files that will be published are: a migration, a seeder and a config file.
 
 ### Seeder
 
