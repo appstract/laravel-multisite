@@ -23,14 +23,23 @@ class MultisiteServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $overwriteViews = Config::get('multisite.views.overwriteable');
-
         // Middleware
         $router->aliasMiddleware('site', CurrentSite::class);
 
         // Composers
-        View::composer('*', \Appstract\Multisite\Composers\CurrentSiteComposer::class);
-        View::composer($overwriteViews, \Appstract\Multisite\Composers\OverwriteViewComposer::class);
+        $this->registerComposers();
+    }
+
+    /**
+     * Register the application services.
+     */
+    public function register()
+    {
+        // App
+        $this->app->singleton(\Appstract\Multisite\Composers\CurrentSiteComposer::class);
+
+        // Config
+        $this->mergeConfigFrom(__DIR__.'/../config/multisite.php', 'multisite');
     }
 
     /**
@@ -48,14 +57,15 @@ class MultisiteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the application services.
+     * Register view composers.
+     *
+     * @return void
      */
-    public function register()
+    protected function registerComposers()
     {
-        // App
-        $this->app->singleton(\Appstract\Multisite\Composers\CurrentSiteComposer::class);
+        $overwriteViews = Config::get('multisite.views.overwriteable');
 
-        // Config
-        $this->mergeConfigFrom(__DIR__.'/../config/multisite.php', 'multisite');
+        View::composer('*', \Appstract\Multisite\Composers\CurrentSiteComposer::class);
+        View::composer($overwriteViews, \Appstract\Multisite\Composers\OverwriteViewComposer::class);
     }
 }

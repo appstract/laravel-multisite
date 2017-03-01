@@ -25,14 +25,8 @@ class Site extends Model
         'url',
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | Mutators
-    |--------------------------------------------------------------------------
-    */
-
     /**
-     * Get the user's first name.
+     * Get the url.
      *
      * @param  string  $value
      * @return string
