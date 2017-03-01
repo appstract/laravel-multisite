@@ -23,7 +23,7 @@ class MultisiteServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $overwriteViews = Config::get('multisite.views.overwrite_path');
+        $overwriteViews = Config::get('multisite.views.overwriteable');
 
         // Middleware
         $router->aliasMiddleware('site', CurrentSite::class);
@@ -52,8 +52,10 @@ class MultisiteServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // App
         $this->app->singleton(\Appstract\Multisite\Composers\CurrentSiteComposer::class);
 
+        // Config
         $this->mergeConfigFrom(__DIR__.'/../config/multisite.php', 'multisite');
     }
 }

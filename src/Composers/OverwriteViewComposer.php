@@ -9,10 +9,28 @@ use Illuminate\View\View;
 class OverwriteViewComposer
 {
     /**
-     * Articles.
-     * @var [type]
+     * Slug of the current site.
+     *
+     * @var string
      */
-    protected $sites;
+    protected $currentSite;
+
+    /**
+     * Name of the sites folder.
+     *
+     * @var string
+     */
+    protected $sitesFolder;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->currentSite = Site::where('slug', Config::get('multisite.site'))->first();
+
+        $this->sitesFolder = Config::get('multisite.views.sites');
+    }
 
 
     /**
@@ -27,25 +45,54 @@ class OverwriteViewComposer
             return $view;
         }
 
-        $currentSite = Site::where('slug', Config::get('multisite.site'))->first();
+        $this->currentPath = collect(explode('/views/', $view->getPath()))->last();
 
-        $viewsPath = realpath(base_path('resources/views'));
-
-        $currentPath  = collect(explode('/views/', $view->getPath()))->last();
-        $possiblePath = $viewsPath.'/'.$currentSite->slug.'/'.$currentPath;
-        $possibleView = str_replace(['.blade.php'], [''], $currentSite->slug.'.'.$currentPath);
-
-        if(\View::exists($possibleView)) {
-            $view->setPath($possiblePath);
+        if(\View::exists($this->getNewView())) {
+            $view->setPath($this->getNewPath());
         }
 
         return $view;
     }
 
     /**
-     * [overwriteDisabled description]
-     * @param  [type] $view [description]
-     * @return [type]       [description]
+     * Get the new path.
+     *
+     * @return string
+     */
+    protected function getNewPath()
+    {
+        return $this->getAbsolutesitesFolder().DIRECTORY_SEPARATOR.$this->currentSite->slug.DIRECTORY_SEPARATOR.$this->currentPath;
+    }
+
+    /**
+     * Get the new view.
+     *
+     * @return string
+     */
+    protected function getNewView()
+    {
+        return str_replace(
+            ['.blade.php'],
+            [''],
+            $this->sitesFolder.'.'.$this->currentSite->slug.'.'.$this->currentPath
+        );
+    }
+
+    /**
+     * Get absolute path to sites folder.
+     *
+     * @return string
+     */
+    protected function getAbsolutesitesFolder()
+    {
+        return base_path('resources/views'.DIRECTORY_SEPARATOR.$this->sitesFolder);
+    }
+
+    /**
+     * Check if overwrites are disabled.
+     *
+     * @param  View $view
+     * @return boolean
      */
     protected function overwriteDisabled($view)
     {
