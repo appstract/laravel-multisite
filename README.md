@@ -19,11 +19,31 @@ composer require appstract/laravel-multisite
 
 ### Config (hosts, homestead)
 
+First of all, you need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml, you need to map the sites to the same folder.
+
 ### Publish
+
+Within you Laravel project, run `php artisan vendor:publish --provider="Appstract\Multisite\MultisiteServiceProvider"` to publish all files used by laravel-multisite. The files that will be published are: a migration, a seeder and a config file.
 
 ### Seeder
 
+The seeder will be published but needs to be run when running `php artisan db:seed`, so you need the add `$this->call(SitesTableSeeder::class);` to your `DatabaseSeeder.php` file. The sites are now present in the database.
+
 ### Routes
+
+This is the main part, within your `routes/web.php` you can set routes for your sites within route groups, like this:
+
+```
+Route::group([
+    'domain' => 'blog.'.config('multisite.host'),
+    'as' => 'blog.',
+    'middleware' => 'site:blog'
+], function () {
+
+    Route::get('/', 'BlogController@homepage')->name('homepage');
+
+});
+```
 
 ## Testing
 
