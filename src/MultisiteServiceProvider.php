@@ -3,10 +3,10 @@
 namespace Appstract\Multisite;
 
 use Config;
-use Appstract\Multisite\Middleware\CurrentSite;
-Use Illuminate\Routing\Router;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Appstract\Multisite\Middleware\CurrentSite;
 
 class MultisiteServiceProvider extends ServiceProvider
 {

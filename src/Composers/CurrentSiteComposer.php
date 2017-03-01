@@ -3,8 +3,8 @@
 namespace Appstract\Multisite\Composers;
 
 use Config;
-use Appstract\Multisite\Site;
 use Illuminate\View\View;
+use Appstract\Multisite\Site;
 
 class CurrentSiteComposer
 {
