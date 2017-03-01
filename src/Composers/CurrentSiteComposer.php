@@ -9,7 +9,8 @@ use Illuminate\View\View;
 class CurrentSiteComposer
 {
     /**
-     * Articles.
+     * Site.
+     *
      * @var [type]
      */
     protected $site;
