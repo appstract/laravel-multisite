@@ -1,4 +1,4 @@
-# Multiple sites on one codebase
+# Laravel Multisite
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/appstract/laravel-multisite.svg?style=flat-square)](https://packagist.org/packages/appstract/laravel-multisite)
 [![Total Downloads](https://img.shields.io/packagist/dt/appstract/laravel-multisite.svg?style=flat-square)](https://packagist.org/packages/appstract/laravel-multisite)
@@ -44,6 +44,8 @@ Route::group([
 
 });
 ```
+
+The magic happens with the site middleware `site:blog`. This will tell your app that the routes within the group are belonging to the blog. It will provide a variable called `$currentSite` in all your views. There is also a config available, which you can access with `Config::get('multisite.site')`.
 
 ## Testing
 
