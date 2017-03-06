@@ -55,7 +55,7 @@ class MultisiteServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'multisite-database');
+        ], 'database');
     }
 
     /**
@@ -67,7 +67,7 @@ class MultisiteServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
-        ], 'multisite-database');
+        ], 'database');
     }
 
     /**

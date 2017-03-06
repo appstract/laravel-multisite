@@ -30,9 +30,9 @@ return [
     | Views
     |--------------------------------------------------------------------------
     |
-    | - Enable/disable overwrites for views
-    | - Which views can be overwrited
-    | - Where are you site views stored (relative to resources/views)
+    | - overwrite: Enable/disable overwrites for views
+    | - overwriteable: Which views can be overwrited
+    | - sites: Where are your site views stored (relative to resources/views)
     |
     */
 
