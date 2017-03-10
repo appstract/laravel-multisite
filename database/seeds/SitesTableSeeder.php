@@ -16,11 +16,11 @@ class SitesTableSeeder extends Seeder
             [
                 'name' => null,
                 'slug' => null,
-                'url' => null
+                'url' => null,
             ],
         ];
 
-        foreach($sites as $site) {
+        foreach ($sites as $site) {
             Site::create($site);
         }
     }
