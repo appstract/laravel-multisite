@@ -15,13 +15,9 @@ You can install the package via composer:
 composer require appstract/laravel-multisite
 ```
 
-## Usage
+### Provider
 
-### Config (hosts, homestead, app)
-
-First of all, you need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml, you need to map the sites to the same folder.
-
-Then add this to your `config/app.php` file:
+Then add the ServiceProvider to your `config/app.php` file:
 
 ```
 'providers' => [
@@ -32,15 +28,19 @@ Then add this to your `config/app.php` file:
     ....
 ```
 
+### Config (hosts, homestead)
+
+You need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml, you need to map the sites to the same folder.
+
 ### Publish
 
 By running `php artisan vendor:publish --provider="Appstract\Multisite\MultisiteServiceProvider"` in your project all files for multisite will be published. The files that will be published are: a migration, a seeder and a config file.
 
 ### Seeder
 
-The seeder will be published but needs to be run when running `php artisan db:seed`, so you need the add `$this->call(SitesTableSeeder::class);` to your `DatabaseSeeder.php` file. The sites are now present in the database.
+The seeder will be published but needs to be run when running `php artisan db:seed`, so you need the add `$this->call(SitesTableSeeder::class);` to your `DatabaseSeeder.php` file. After migrating and seeding the sites are now present in the database.
 
-### Routes
+## Usage
 
 This is the main part, within your `routes/web.php` you can set routes for your sites within route groups, like this:
 
