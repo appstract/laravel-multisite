@@ -25,10 +25,8 @@ class MultisiteServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        // Middleware
-        $router->aliasMiddleware('site', CurrentSite::class);
+        $this->registerMiddleware($router);
 
-        // Composers
         $this->registerComposers();
     }
 
@@ -68,6 +66,21 @@ class MultisiteServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
         ], 'database');
+    }
+
+    /**
+     * Register middleware.
+     *
+     * @param  object $router
+     * @return void
+     */
+    protected function registerMiddleware($router)
+    {
+        if (method_exists($router, 'aliasMiddleware')) {
+            $router->aliasMiddleware('site', CurrentSite::class);
+        } else {
+            $router->middleware('site', CurrentSite::class);
+        }
     }
 
     /**
