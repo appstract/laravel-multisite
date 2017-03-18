@@ -11,7 +11,7 @@ With this package it is possible to build multiple sites/(sub)domains on one cod
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require appstract/laravel-multisite
 ```
 
@@ -19,13 +19,14 @@ composer require appstract/laravel-multisite
 
 Then add the ServiceProvider to your `config/app.php` file:
 
-```
+```php
 'providers' => [
     ...
 
-    Appstract\Multisite\MultisiteServiceProvider::class
+    Appstract\Multisite\MultisiteServiceProvider::class,
 
-    ....
+    ...
+],
 ```
 
 ### Config (hosts, homestead)
@@ -44,7 +45,7 @@ The seeder will be published but needs to be run when running `php artisan db:se
 
 This is the main part, within your `routes/web.php` you can set routes for your sites within route groups, like this:
 
-```
+```php
 Route::group([
     'domain' => 'blog.'.config('multisite.host'),
     'as' => 'blog.',
