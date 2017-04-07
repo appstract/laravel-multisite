@@ -16,9 +16,13 @@ class MultisiteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         if ($this->app->runningInConsole()) {
-            $this->registerMigrations();
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'database');
 
-            $this->publishSeeds();
+            $this->publishes([
+                __DIR__.'/../database/seeds' => database_path('seeds'),
+            ], 'database');
 
             $this->publishes([
                 __DIR__.'/../config/multisite.php' => config_path('multisite.php'),
@@ -40,32 +44,6 @@ class MultisiteServiceProvider extends ServiceProvider
 
         // Config
         $this->mergeConfigFrom(__DIR__.'/../config/multisite.php', 'multisite');
-    }
-
-    /**
-     * Register and publish migration files.
-     *
-     * @return void
-     */
-    protected function registerMigrations()
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'database');
-    }
-
-    /**
-     * Publish seed files.
-     *
-     * @return void
-     */
-    protected function publishSeeds()
-    {
-        $this->publishes([
-            __DIR__.'/../database/seeds' => database_path('seeds'),
-        ], 'database');
     }
 
     /**
