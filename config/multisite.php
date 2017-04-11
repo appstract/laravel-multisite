@@ -31,7 +31,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | - overwrite: Enable/disable overwrites for views
-    | - overwriteable: Which views can be overwrited
+    | - overwriteable: Which views can be overwritten
     | - sites: Where are your site views stored (relative to resources/views)
     |
     */
