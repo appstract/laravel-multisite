@@ -68,9 +68,14 @@ class MultisiteServiceProvider extends ServiceProvider
      */
     protected function registerComposers()
     {
-        $overwriteViews = Config::get('multisite.views.overwriteable');
+        View::composer(
+            '*',
+            \Appstract\Multisite\Composers\CurrentSiteComposer::class
+        );
 
-        View::composer('*', \Appstract\Multisite\Composers\CurrentSiteComposer::class);
-        View::composer($overwriteViews, \Appstract\Multisite\Composers\OverwriteViewComposer::class);
+        View::composer(
+            Config::get('multisite.views.overwriteable'),
+            \Appstract\Multisite\Composers\OverwriteViewComposer::class
+        );
     }
 }
