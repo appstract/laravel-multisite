@@ -26,6 +26,17 @@ class Site extends Model
     ];
 
     /**
+     * Check if the site is equal to the given slug.
+     *
+     * @param  string  $slug
+     * @return boolean
+     */
+    public function is($slug)
+    {
+        return $this->slug == $slug;
+    }
+
+    /**
      * Get the url.
      *
      * @param  string  $value
