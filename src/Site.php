@@ -31,7 +31,7 @@ class Site extends Model
      * @param  string  $slug
      * @return boolean
      */
-    public function is($slug)
+    public function equals($slug)
     {
         return $this->slug == $slug;
     }
