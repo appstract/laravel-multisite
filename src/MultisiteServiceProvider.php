@@ -18,11 +18,11 @@ class MultisiteServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../database/migrations' => database_path('migrations'),
-            ], 'database');
+            ], 'migrations');
 
             $this->publishes([
                 __DIR__.'/../database/seeds' => database_path('seeds'),
-            ], 'database');
+            ], 'seeds');
 
             $this->publishes([
                 __DIR__.'/../config/multisite.php' => config_path('multisite.php'),
