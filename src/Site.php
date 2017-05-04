@@ -29,7 +29,7 @@ class Site extends Model
      * Check if the site is equal to the given slug.
      *
      * @param  string  $slug
-     * @return boolean
+     * @return bool
      */
     public function equals($slug)
     {
