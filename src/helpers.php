@@ -1,7 +1,7 @@
 <?php
 
-use Config;
 use Appstract\Multisite\Site;
+use Illuminate\Support\Facades\Config;
 
 if (! function_exists('current_site')) {
     /**
