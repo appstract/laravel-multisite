@@ -1,6 +1,7 @@
 <?php
 
 use Config;
+use Appstract\Multisite\Site;
 
 if (! function_exists('current_site')) {
     /**
