@@ -31,7 +31,7 @@ Then add the ServiceProvider to your `config/app.php` file:
 
 ### Config (hosts, homestead)
 
-You need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml, you need to map the sites to the same folder.
+You need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml`, you need to map the sites to the same folder.
 
 ### Publish
 
