@@ -70,11 +70,15 @@ class OverwriteViewComposer
      */
     protected function getNewView()
     {
-        return str_replace(
-            ['.blade.php'],
-            [''],
-            $this->sitesFolder.'.'.$this->currentSite->slug.'.'.$this->currentPath
-        );
+        if($this->currentSite) {
+            return str_replace(
+                ['.blade.php'],
+                [''],
+                $this->sitesFolder.'.'.$this->currentSite->slug.'.'.$this->currentPath
+            );
+        }
+
+        return $this->currentPath;
     }
 
     /**
