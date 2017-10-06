@@ -70,7 +70,7 @@ class OverwriteViewComposer
      */
     protected function getNewView()
     {
-        if($this->currentSite) {
+        if ($this->currentSite) {
             return str_replace(
                 ['.blade.php'],
                 [''],
