@@ -15,20 +15,6 @@ You can install the package via composer:
 composer require appstract/laravel-multisite
 ```
 
-### Provider
-
-Then add the ServiceProvider to your `config/app.php` file:
-
-```php
-'providers' => [
-    ...
-
-    Appstract\Multisite\MultisiteServiceProvider::class,
-
-    ...
-],
-```
-
 ### Config (hosts, homestead)
 
 You need to add the sites to your `/etc/hosts` file and `Homestead.yaml`. For example, `mywebsite.dev` and `blog.mywebsite.dev`. In the `Homestead.yaml`, you need to map the sites to the same folder.
@@ -51,9 +37,7 @@ Route::group([
     'as' => 'blog.',
     'middleware' => 'site:blog'
 ], function () {
-
     Route::get('/', 'BlogController@homepage')->name('homepage');
-
 });
 ```
 
