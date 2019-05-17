@@ -11,6 +11,10 @@ if (! function_exists('current_site')) {
      */
     function current_site()
     {
-        return Site::where('slug', Config::get('multisite.site'))->first();
+        $modelClass = Config::get('multisite.model', Site::class);
+
+        return call_user_func([$modelClass, 'query'])
+            ->where('slug', Config::get('multisite.site'))
+            ->first();
     }
 }
