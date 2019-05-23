@@ -27,7 +27,11 @@ class OverwriteViewComposer
      */
     public function __construct()
     {
-        $this->currentSite = Site::where('slug', Config::get('multisite.site'))->first();
+        $modelClass = Config::get('multisite.model', Site::class);
+
+        $this->currentSite = call_user_func([$modelClass, 'query'])
+            ->where('slug', Config::get('multisite.site'))
+            ->first();
 
         $this->sitesFolder = Config::get('multisite.views.sites');
     }

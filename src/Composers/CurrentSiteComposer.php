@@ -24,7 +24,11 @@ class CurrentSiteComposer
     public function compose(View $view)
     {
         if (! $this->site) {
-            $this->site = Site::where('slug', Config::get('multisite.site'))->first();
+            $modelClass = Config::get('multisite.model', Site::class);
+
+            $this->site = call_user_func([$modelClass, 'query'])
+                ->where('slug', Config::get('multisite.site'))
+                ->first();
         }
 
         $view->with('currentSite', $this->site);

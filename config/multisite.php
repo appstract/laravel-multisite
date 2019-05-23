@@ -42,4 +42,16 @@ return [
         'sites' => 'sites',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Model
+    |--------------------------------------------------------------------------
+    |
+    | It is possible to extend \Appstract\Multisite\Site for any purpose, like
+    | changing database table name or improve functionality.
+    |
+    */
+
+    'model' => '\\Appstract\\Multisite\\Site',
+
 ];
