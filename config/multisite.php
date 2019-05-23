@@ -52,6 +52,6 @@ return [
     |
     */
 
-    'model' => env('MULTISITE_MODEL', '\\Appstract\\Multisite\\Site'),
+    'model' => '\\Appstract\\Multisite\\Site',
 
 ];
